@@ -9,24 +9,26 @@ export class TasksService {
 
   constructor(private http: HttpClient) { }
 
-  getTasks(id:any){
+  getTasks(){
     let url = '/api/task';
-    return this.http.get(url+id);
+    return this.http.get(environment.urlApi+url);
   }
 
   addTasks(data:any){
+    console.log(data);
+
     let url ="/api/task";
     return this.http.post<any>(environment.urlApi+url,data);
   }
 
   editTasks(data:any){
     let url ="/api/task/";
-    return this.http.post<any>(environment.urlApi+url+data.id,data);
+    return this.http.put<any>(environment.urlApi+url+data.id,data);
   }
 
-  deleteTasks(data:any){
+  deleteTasks(id:any){
     let url ="/api/task/";
-    return this.http.delete(environment.urlApi+url+data.id);
+    return this.http.delete(environment.urlApi+url+id);
   }
 
 }

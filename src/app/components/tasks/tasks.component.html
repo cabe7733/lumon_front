@@ -2,57 +2,61 @@
     <div class="card-body">
         <h5 class="card-title text-center mb-3">Tasks</h5>
         <form [formGroup]="validationForm" (ngSubmit)="onAddTask()">
-            <div class="row mb-3">
+            <div class="row mb-4">
                 <div class="col-md-6">
                     <mdb-form-control>
-                        <input mdbValidate mdbInput type="text" id="form1" class="form-control" formControlName="desc" required />
-                        <label mdbLabel class="form-label" for="form1">First name</label>
-                        <mdb-error *ngIf="
-                    desc?.invalid && (desc?.dirty || desc?.touched)
-              ">First name is required</mdb-error>
-                        <mdb-success *ngIf="
-                    desc?.valid && (desc?.dirty || desc?.touched)
-              ">Looks good!</mdb-success>
+                        <input mdbValidate mdbInput type="text" class="form-control" formControlName="title" required/>
+                        <label mdbLabel class="form-label">Titulo Tarea</label>
+                        <mdb-error *ngIf="title?.invalid && (title?.dirty || title?.touched)">title is required</mdb-error>
+                        <mdb-success *ngIf="title?.valid && (title?.dirty || title?.touched)"></mdb-success>
                     </mdb-form-control>
                 </div>
                 <div class="col-md-6">
                     <mdb-form-control>
-                        <input mdbValidate mdbInput type="text" id="form2" class="form-control" formControlName="lastName" required />
-                        <label mdbLabel class="form-label" for="form2">Last name</label>
-                        <mdb-error *ngIf="priority?.invalid && (priority?.dirty || priority?.touched)">Last name is required</mdb-error>
-                        <mdb-success *ngIf="priority?.valid && (priority?.dirty || priority?.touched)">Looks good!</mdb-success>
+                        <input mdbValidate mdbInput type="text" class="form-control" formControlName="description" required />
+                        <label mdbLabel class="form-label">Descripcion Tarea</label>
+                        <mdb-error *ngIf="description?.invalid && (description?.dirty || description?.touched)">First name is required</mdb-error>
+                        <mdb-success *ngIf="description?.valid && (description?.dirty || description?.touched)"></mdb-success>
                     </mdb-form-control>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-4">
                 <div class="col-md-6">
                     <mdb-form-control>
-                        <select name="select" mdbValidate mdbInput type="text" id="form2" class="form-control select-input" formControlName="lastName" required>
-                            <option value="value1">Value 1</option>
-                            <option value="value2" selected>Value 2</option>
-                            <option value="value3">Value 3</option>
+                        <select name="select" mdbValidate mdbInput type="text" id="form2" class="form-control select-input" formControlName="state" required>
+                            <option *ngFor="let item of states" [value]="item.value">{{item.name}}</option>
                           </select>
-                        <label mdbLabel class="form-label" for="form1">First name</label>
+                        <label mdbLabel class="form-label" for="form1">Estado</label>
+                        <mdb-error *ngIf="state?.invalid && (state?.dirty || state?.touched)">state required</mdb-error>
+                        <mdb-success *ngIf="state?.valid && (state?.dirty || state?.touched)"></mdb-success>
                     </mdb-form-control>
                 </div>
                 <div class="col-md-6">
                     <mdb-form-control>
-                        <select name="select" mdbValidate mdbInput type="text" id="form2" class="form-control select-input" formControlName="lastName" required>
-                            <option value="value1">Value 1</option>
-                            <option value="value2" selected>Value 2</option>
-                            <option value="value3">Value 3</option>
+                        <select name="select" mdbValidate mdbInput type="text" id="form2" class="form-control select-input" formControlName="priority" required>
+                            <option *ngFor="let item of prioritys" [value]="item.value">{{item.name}}</option>
                           </select>
-                        <label mdbLabel class="form-label select-label" for="form1">First name</label>
+                        <label mdbLabel class="form-label select-label" for="form1">Prioridad</label>
+                        <mdb-error *ngIf="priority?.invalid && (priority?.dirty || priority?.touched)">priority is required</mdb-error>
+                        <mdb-success *ngIf="priority?.valid && (priority?.dirty || priority?.touched)"></mdb-success>
                     </mdb-form-control>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <mdb-form-control>
-                        <input mdbValidate mdbInput type="text" id="form2" class="form-control" formControlName="lastName" required />
-                        <label mdbLabel class="form-label" for="form2">Last name</label>
-                        <mdb-error *ngIf="priority?.invalid && (priority?.dirty || priority?.touched)">Last name is required</mdb-error>
-                        <mdb-success *ngIf="priority?.valid && (priority?.dirty || priority?.touched)">Looks good!</mdb-success>
+                        <input mdbValidate mdbInput type="text" id="form2" class="form-control" formControlName="incharge" required />
+                        <label mdbLabel class="form-label" for="form2">Ecargado</label>
+                        <mdb-error *ngIf="incharge?.invalid && (incharge?.dirty || incharge?.touched)">Ecargado is required</mdb-error>
+                        <mdb-success *ngIf="incharge?.valid && (incharge?.dirty || incharge?.touched)"></mdb-success>
+                    </mdb-form-control>
+                </div>
+                <div class="col-md-6">
+                    <mdb-form-control>
+                        <tag-input [formControlName]="'tags'" name="items" class="form-control">
+                        </tag-input>
+                        <mdb-error *ngIf="tags?.invalid && (tags?.dirty || tags?.touched)">tags is required</mdb-error>
+                        <mdb-success *ngIf="tags?.valid && (tags?.dirty || tags?.touched)"></mdb-success>
                     </mdb-form-control>
                 </div>
             </div>
@@ -64,94 +68,35 @@
 <table class="table align-middle mb-0 bg-white">
     <thead class="bg-light">
         <tr>
-            <th>Name</th>
+            <th>ID</th>
             <th>Title</th>
-            <th>Status</th>
-            <th>Position</th>
-            <th>Actions</th>
+            <th>Descripcion</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+            <th>Ecargado</th>
+            <th>Tags</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr *ngFor="let item of tasks; let i=index">
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.state}}</td>
             <td>
-                <div class="d-flex align-items-center">
-                    <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
-                    <div class="ms-3">
-                        <p class="fw-bold mb-1">John Doe</p>
-                        <p class="text-muted mb-0">john.doe@gmail.com</p>
-                    </div>
-                </div>
+                <span class="badge badge-success rounded-pill d-inline" *ngIf="item.priority == 'normal'">{{item.priority}}</span>
+                <span class="badge badge-primary rounded-pill d-inline" *ngIf="item.priority == 'importante'">{{item.priority}}</span>
+                <span class="badge badge-danger rounded-pill d-inline" *ngIf="item.priority == 'urgente'">{{item.priority}}</span>
             </td>
+            <td>{{item.incharge}}</td>
             <td>
-                <p class="fw-normal mb-1">Software engineer</p>
-                <p class="text-muted mb-0">IT department</p>
-            </td>
-            <td>
-                <span class="badge badge-success rounded-pill d-inline">Active</span>
-            </td>
-            <td>Senior</td>
-            <td>
-                <button type="button" class="btn btn-link btn-sm btn-rounded">
-          Edit
-        </button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="d-flex align-items-center">
-                    <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt="" style="width: 45px; height: 45px" />
-                    <div class="ms-3">
-                        <p class="fw-bold mb-1">Alex Ray</p>
-                        <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <p class="fw-normal mb-1">Consultant</p>
-                <p class="text-muted mb-0">Finance</p>
-            </td>
-            <td>
-                <span class="badge badge-primary rounded-pill d-inline">Onboarding</span
-          >
-      </td>
-      <td>Junior</td>
-      <td>
-        <button
-                type="button"
-                class="btn btn-link btn-rounded btn-sm fw-bold"
-                mdbRipple rippleColor="dark"
-                >
-          Edit
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <div class="d-flex align-items-center">
-          <img
-              src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-              class="rounded-circle"
-              alt=""
-              style="width: 45px; height: 45px"
-              />
-          <div class="ms-3">
-            <p class="fw-bold mb-1">Kate Hunington</p>
-            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-          </div>
-        </div>
-      </td>
-      <td>
-        <p class="fw-normal mb-1">Designer</p>
-        <p class="text-muted mb-0">UI/UX</p>
-      </td>
-      <td>
-        <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-            </td>
-            <td>Senior</td>
-            <td>
-                <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" mdbRipple rippleColor="dark">
-          Edit
-        </button>
+                <button type="button" (click)="openModal(item)" class="btn btn-primary btn-floating">
+                <i class="fas fa-pen"></i>
+              </button>
+                <button type="button" (click)="deleteTask(item.id)" class="btn btn-danger btn-floating">
+                <i class="fas fa-trash"></i>
+              </button>
             </td>
         </tr>
     </tbody>
