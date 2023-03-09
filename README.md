@@ -9,6 +9,7 @@ $ git clone https://github.com/cabe7733/lumon_front.git
 $ npm install
 ```
 
-3. Start proyect
+3. Start proyect 
+```bash
 $ ng serve
 ```
