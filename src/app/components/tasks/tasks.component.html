@@ -90,6 +90,7 @@
                 <span class="badge badge-danger rounded-pill d-inline" *ngIf="item.priority == 'urgente'">{{item.priority}}</span>
             </td>
             <td>{{item.incharge}}</td>
+            <th>{{item.tags | json }}</th>
             <td>
                 <button type="button" (click)="openModal(item)" class="btn btn-primary btn-floating">
                 <i class="fas fa-pen"></i>
